@@ -9,13 +9,19 @@ class RootWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: FirstScreen());
+    return MaterialApp(home: CounterAppScreen());
   }
 }
 
-class FirstScreen extends StatelessWidget {
-  const FirstScreen({super.key});
+class CounterAppScreen extends StatefulWidget {
+  const CounterAppScreen({super.key});
 
+  @override
+  State<CounterAppScreen> createState() => _CounterAppScreenState();
+}
+
+class _CounterAppScreenState extends State<CounterAppScreen> {
+  int counter = 0;
   @override
   Widget build(BuildContext context) {
     //counter App
@@ -25,9 +31,23 @@ class FirstScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("Counter App"),
-            ElevatedButton(onPressed: () {}, child: const Text("+")),
-            Text("0"),
-            ElevatedButton(onPressed: () {}, child: const Text("-")),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  counter++;
+                });
+              },
+              child: const Text("+"),
+            ),
+            Text("counter: $counter"),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  counter--;
+                });
+              },
+              child: const Text("-"),
+            ),
           ],
         ),
       ),
