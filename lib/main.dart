@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/profile_card.dart';
+import 'package:flutter_application_1/auth/login_screen.dart';
 
 void main() {
-  runApp( RootWidget());
+  runApp(RootWidget());
 }
 
 class RootWidget extends StatelessWidget {
@@ -10,6 +10,6 @@ class RootWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: ProfileCard(),debugShowCheckedModeBanner: false,);
+    return MaterialApp(home: LoginScreen(), debugShowCheckedModeBanner: false);
   }
 }

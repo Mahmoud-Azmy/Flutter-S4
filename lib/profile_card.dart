@@ -9,7 +9,7 @@ class ProfileCard extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 137, 185, 225),
       appBar: AppBar(
         title: Text('Profile Card'),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color.fromARGB(255, 95, 159, 212),
         centerTitle: true,
       ),
       body: Center(
