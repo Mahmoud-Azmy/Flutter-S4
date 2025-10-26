@@ -8,6 +8,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isVisible = true;
 
   @override
@@ -23,82 +24,113 @@ class _LoginScreenState extends State<LoginScreen> {
           margin: EdgeInsets.all(20),
           padding: EdgeInsets.all(20),
 
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'login',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-              Text('Email', style: TextStyle(color: Colors.grey)),
-              TextField(
-                decoration: InputDecoration(
-                  fillColor: const Color.fromARGB(255, 226, 218, 218),
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: 'enter your email',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(Icons.email, color: Colors.grey),
-                ),
-              ),
-              SizedBox(height: 20),
-              Text('password', style: TextStyle(color: Colors.grey)),
-              SizedBox(height: 5),
-              TextField(
-                obscureText: isVisible,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.lock, color: Colors.grey),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.visibility_off, color: Colors.grey),
-                    onPressed: () {
-                      isVisible = !isVisible;
-                      setState(() {});
-                    },
-                  ),
-                  fillColor: const Color.fromARGB(255, 226, 218, 218),
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: 'enter your password',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                  minimumSize: Size(double.infinity, 50),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Card(
+                  elevation: 8,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(100),
                   ),
                 ),
-                child: Text('login'),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('dont have an account?'),
-                  SizedBox(width: 5),
-                  Text('sign up', style: TextStyle(color: Colors.blue)),
-                ],
-              ),
-            ],
+                Center(
+                  child: Text(
+                    'login',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                Text('Email', style: TextStyle(color: Colors.grey)),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'please enter your email';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    fillColor: const Color.fromARGB(255, 226, 218, 218),
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: 'enter your email',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    prefixIcon: Icon(Icons.email, color: Colors.grey),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text('password', style: TextStyle(color: Colors.grey)),
+                SizedBox(height: 5),
+                TextFormField(
+                  validator: (value) {
+                    if (isVisible) {
+                      return 'please enter your password';
+                    }
+                    return null;
+                  },
+                  obscureText: isVisible,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.lock, color: Colors.grey),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.visibility_off, color: Colors.grey),
+                      onPressed: () {
+                        isVisible = !isVisible;
+                        setState(() {});
+                      },
+                    ),
+                    fillColor: const Color.fromARGB(255, 226, 218, 218),
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: 'enter your password',
+                    hintStyle: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // Process data.
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    minimumSize: Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: Text('login'),
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('dont have an account?'),
+                    SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        'sign up',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
