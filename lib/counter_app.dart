@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/counter_provider.dart';
+import 'package:provider/provider.dart';
 
 class CounterApp extends StatefulWidget {
   const CounterApp({super.key});
@@ -17,8 +19,16 @@ class _CounterAppState extends State<CounterApp> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Counter : ...', style: TextStyle(fontSize: 30)),
-            ElevatedButton(onPressed: () {}, child: const Text('Increment')),
+            Text(
+              'Counter :${context.watch<CounterProvider>().counter} ',
+              style: TextStyle(fontSize: 30),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.read<CounterProvider>().increment();
+              },
+              child: const Text('Increment'),
+            ),
           ],
         ),
       ),
